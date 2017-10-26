@@ -13,7 +13,7 @@ namespace Sitecore.Support.Commerce.UX.Merchandising
     public class CustomCommerceVariantController : BusinessController
     {
         private const string commerceProductsIndex = "commerce_products_master_index";
-        private Regex digitsRegex = new Regex("^[0-9]+$");
+        private Regex digitsRegex = new Regex("^[1-9][0-9]*$");
 
         [HttpPost]
         public ActionResult Create(FormCollection collection)
