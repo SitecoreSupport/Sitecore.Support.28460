@@ -13,7 +13,6 @@ namespace Sitecore.Support.Commerce.UX.Merchandising
     public class CustomCommerceVariantController : BusinessController
     {
         private const string commerceProductsIndex = "commerce_products_master_index";
-        private Regex digitsRegex = new Regex("^[1-9][0-9]*$");
 
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -69,24 +68,7 @@ namespace Sitecore.Support.Commerce.UX.Merchandising
                 });
                 return base.Json(updateActionResult2);
             }
-            else if (!IsVariantIdInteger(strVariantId))
-            {
-                UpdateActionResult updateActionResult3 = new UpdateActionResult
-                {
-                    Status = "failed"
-                };
-                updateActionResult3.Errors.Add(new ValidationError
-                {
-                    ErrorMessage = Translate.Text("A variant must be integer.")
-                });
-                return base.Json(updateActionResult3);
-            }
             return this.CreateItem(collection, strVariantId, sitecoreTemplateId, iD);
-        }
-
-        private bool IsVariantIdInteger(string name)
-        {
-            return digitsRegex.IsMatch(name);
         }
 
         private bool IsVariantIdUniqueAmongVariantsAndProducts(string name)
